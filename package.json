@@ -1,0 +1,15 @@
+{
+  "name": "wondernest",
+  "version": "1.0.0",
+  "description": "Finding hotels and rooms to stay",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "pratikjadhav",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "mongoose": "^8.12.1"
+  }
+}
