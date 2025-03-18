@@ -16,7 +16,7 @@ const listingSchema=new Schema({
     },
     price:{
         type:Number,
-        default:"10$"
+        default:1000
     },
     location:{
         type:String,
@@ -28,4 +28,4 @@ const listingSchema=new Schema({
 
 const listing=mongoose.model("listing",listingSchema);
 
-module.exports(listing);
+module.exports=listing;
