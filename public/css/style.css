@@ -24,20 +24,34 @@
         color: rgb(82, 78, 78);
 
     }
+    
 }
 .f-li{
     display: flex;
     align-items: center;
+    a:hover{
+        color:rgb(0, 85, 244);
+        text-decoration: underline;
+    }
+}
 
-}
-.f-link{
-    color: rgb(82, 78, 78);
-    text-decoration: none;
-   
-}
 .f-info{
     height: 100px;
     display: flex;
     justify-content: space-around;
     align-items:center ;
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+    .f-link, .f-li, .f-info, .f-info-social {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+
+    }
+
+    .f-info {
+        height: auto;
+    }
 }
