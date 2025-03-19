@@ -145,7 +145,7 @@ const sampleListings = [
   {
   title: "Floating Water Villa",
   description: "An adventure-filled stay awaits you.",
-  image:"https://www.cvvillas.com/dynamic-images/5000-5999/5301/5301_c=(0,239,3746,2106)_w=1366_h=768.webp?v=202405071552",
+  image:"https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjc4fHxob3RlbHN8ZW58MHx8MHx8fDA%3D",
   price: 9353,
   location: "Maldives",
   country: "Maldives",
