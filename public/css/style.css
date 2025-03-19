@@ -1,3 +1,43 @@
-body{
-    background-color: pink;
+.navbar{
+    height: 4rem !important;
+}
+
+.nav-link{
+    color: black !important;
+}
+.fa-compass{
+    color: rgb(248, 92, 92);
+    font-size: 2rem;
+}
+.fa-brands{
+    color: rgb(82, 78, 78);
+    font-size: 1.3rem;
+    margin-left:5px;
+}
+.f-link{
+    display: flex;
+    text-decoration: none;
+    gap: 10px;
+    
+    a{
+        text-decoration: none; 
+        color: rgb(82, 78, 78);
+
+    }
+}
+.f-li{
+    display: flex;
+    align-items: center;
+
+}
+.f-link{
+    color: rgb(82, 78, 78);
+    text-decoration: none;
+   
+}
+.f-info{
+    height: 100px;
+    display: flex;
+    justify-content: space-around;
+    align-items:center ;
 }
