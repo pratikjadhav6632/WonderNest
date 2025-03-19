@@ -74,7 +74,7 @@ app.delete("/listings/:id",async(req,res)=>{
 
 //Testing route
 /*app.get("/test",async (req,res)=>{
-    let sampledata=new listing({
+    let sampledata=new Listing({
         title:"AC Room",
         description:"demo description",
         location:"pune",
