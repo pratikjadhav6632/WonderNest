@@ -1,31 +1,32 @@
 <%layout("/layouts/boilerplate")-%>
 <body>
+  <br><br>
     <h3>All deatils</h3>
-    <div class="card mb-3" style="max-width: 540px;">
-        <div class="row g-0">
-          <div class="col-md-8">
-            <img src="<%=listing.image%>" class="img-fluid rounded-start" alt="...">
+  <br><br>
+    <div class="card display-card mb-3" style="max-width: 540px;">
+      <div class="row-md-8 g-0 display-row">
+        <div class="col-md-8">
+          <img src="<%=listing.image%>" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body col-md-8 data-col">
+            <h5 class="card-title"><%=listing.title%></h5>
+            <p class="card-text"><%=listing.description%></p>
+            <p class="card-text">&#8377 <%=listing.price.toLocaleString("en-IN")%>/night</p>
+            <p class="card-text"><%=listing.location%></p>
+            <p class="card-text"><%=listing.country%></p>
+            <div class="btns">
+              <a href="/listings/<%=listing._id%>/edit">
+                  <button class="btn btn-changes">Edit</button>
+              </a>
+              <form action="/listings/<%=listing._id%>?_method=DELETE" method="post">
+                  <button class="btn btn-changes">Delete</button>
+              </form>
           </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title"><%=listing.title%>></h5>
-              <p class="card-text"><%=listing.description%>></p>
-              <p class="card-text">&#8377 <%=listing.price.toLocaleString("en-IN")%>/night</p>
-              <p class="card-text"><%=listing.location%></p>
-              <p class="card-text"><%=listing.country%></p>
-
-            </div>
           </div>
         </div>
       </div>
-      <div class="btns">
-        <a href="/listings/<%=listing._id%>/edit">
-            <button class="btn btn-changes">Edit</button>
-        </a>
-        <form action="/listings/<%=listing._id%>?_method=DELETE" method="post">
-            <button class="btn btn-changes">Delete</button>
-        </form>
     </div>
-   
+
+    <br><br>
 </body>
-</html>
