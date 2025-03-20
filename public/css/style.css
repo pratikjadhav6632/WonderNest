@@ -67,13 +67,13 @@
     align-items: center;
 
 }
-.card{
+.card-display{
     margin-bottom: 4rem ;
     margin-right: 5rem ;
     border: none !important;
     transition: transform .2s;
 }
-.card:hover{
+.card-display:hover{
     transform: scale(1.1);
 
 }
@@ -87,4 +87,20 @@
 }
 .card-img-top:hover{
     opacity: 0.5;
+}
+
+/*Show route*/
+
+.img-fluid{
+    height: 18rem !important;
+    width: 30rem !important;
+    object-fit: cover;
+}
+.btn-changes{
+    color: white !important;
+    background-color: rgb(235, 106, 106) !important;
+}
+.btns{
+    display: flex;
+   gap: 20px;
 }

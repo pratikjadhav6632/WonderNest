@@ -8,7 +8,7 @@
         <br><br>
         <input type="text" name="listings[image]" value="<%=listing.image%>">
         <br><br>
-        <input type="number" name="listings[price]" value="<%=listing.price%>">
+        <input type="number" name="listings[price]" value="&#8377 <%=listing.price.toLocaleString("en-IN")%>/night">
         <br><br>
         <input type="text" name="listings[location]" value="<%=listing.location%>">
         <br><br>
@@ -16,5 +16,4 @@
         <br><br>
         <button>Update</button>
     </form>
-    
 </body>
