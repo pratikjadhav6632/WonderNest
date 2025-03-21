@@ -103,6 +103,17 @@
    gap: 20px;
 }
 
+.display-row{
+    display: flex !important;
+    gap: 20px;
+    
+}
+.display-card{
+    border: none !important;
+}
+.data-col{
+    width: 400px !important;
+}
 /*create new page*/
 .btn-add{
     color: white !important;
@@ -118,16 +129,12 @@
 
 }
 
+/*Update page*/
 
-.display-row{
-    display: flex !important;
-    gap: 20px;
-    
-}
-.display-card{
+.btn-edit{
+    color: white !important;
+    background-color: rgb(235, 106, 106) !important;
+    border-radius: 1rem !important;
     border: none !important;
+    padding:10px 30px  !important;
 }
-.data-col{
-    width: 400px !important;
-}
-
