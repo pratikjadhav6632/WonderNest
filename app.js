@@ -6,6 +6,7 @@ const Listing = require("./model/listing.js")
 const path = require("path");
 const methodOverride=require("method-override");
 const engine=require("ejs-mate");
+const ExpressError=require("ExpressError")
 
 
 main().then((res) => {
