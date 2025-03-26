@@ -6,7 +6,7 @@ const Listing = require("./model/listing.js")
 const path = require("path");
 const methodOverride=require("method-override");
 const engine=require("ejs-mate");
-const ExpressError=require("ExpressError")
+const ExpressError=require("./ExpressError");
 
 
 main().then((res) => {
@@ -25,6 +25,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.engine("ejs",engine);
 app.use(express.static(path.join(__dirname,"/public")));
+
+//Error Handling Function
+function ErrHandler(fn){
+    return function(req,res,next){
+        fn(req,res,next).catch((err)=>next(err));
+    };
+};
 
 //Index route
 app.get("/listings", async (req, res) => {
@@ -46,18 +53,18 @@ app.get("/listings/:id", async (req, res) => {
 })
 
 //Create route
-app.post("/listings", async (req, res) => {
+app.post("/listings", ErrHandler(async (req, res) => {
     const newListing = new Listing(req.body.listings);
     newListing.save();
     res.redirect("/listings");
-})
+}));
 
 //Edit route
-app.get("/listings/:id/edit",async(req,res)=>{
+app.get("/listings/:id/edit",ErrHandler(async(req,res)=>{
     let {id}=req.params;
     let listing=await Listing.findById(id);
     res.render("listings/edit.ejs",{listing});
-})
+}));
 
 //Update route
 app.put("/listings/:id",async(req,res)=>{
@@ -97,3 +104,22 @@ app.get("/", (req, res) => {
 app.listen('8080', (req, res) => {
     console.log("Listening Port 8080");
 })
+
+// Validation Error handler
+// const ValidationErrorHandler=(err)=>{
+//     console.log("Please check rules");
+//     // console.log(err.message);
+//     return err;
+// }
+// app.use((err,req,res,next)=>{
+//     console.log(err.name);
+//     if(err.name=="ValidationError"){
+//        err= ValidationErrorHandler(err);
+//     }
+//     next(err);
+// })
+// app.use((err,req,res,next)=>{
+//     let {status=500,message="Some error occure"}=err;
+//     res.status(status).send(message);
+   
+// })
