@@ -56,7 +56,7 @@ app.get("/listings/:id", async (req, res) => {
 app.post("/listings", async (req, res, next) => {
     try {
         const newListing = new Listing(req.body.listings);
-        newListing.save();
+       await  newListing.save();
         res.redirect("/listings");
     } catch (err) {
         next(err);
