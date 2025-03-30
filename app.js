@@ -6,8 +6,8 @@ const Listing = require("./model/listing.js")
 const path = require("path");
 const methodOverride = require("method-override");
 const engine = require("ejs-mate");
-const wrapAsync=require("./utils/wrapAsync.js");
-const ExpressError=require("./utils/ExpressErr.js");
+const wrapAsync = require("./utils/wrapAsync.js");
+const ExpressError = require("./utils/ExpressErr.js");
 
 main().then((res) => {
     console.log("Database Connected...");
@@ -41,9 +41,9 @@ app.get("/listings", wrapAsync(async (req, res) => {
 }));
 
 //New route
-app.get("/listings/new", wrapAsync((req, res) => {
+app.get("/listings/new", (req, res) => {
     res.render("listings/new.ejs")
-}));
+});
 
 //Show route 
 app.get("/listings/:id", wrapAsync(async (req, res) => {
@@ -53,12 +53,10 @@ app.get("/listings/:id", wrapAsync(async (req, res) => {
 }));
 
 //Create route
-app.post("/listings",wrapAsync(async (req, res, next) => {
-  
-        const newListing = new Listing(req.body.listings);
-       await  newListing.save();
-        res.redirect("/listings");
-   
+app.post("/listings", wrapAsync(async (req, res, next) => {
+    const newListing = new Listing(req.body.listings);
+    await newListing.save();
+    res.redirect("/listings");
 }));
 
 //Edit route
@@ -103,13 +101,13 @@ app.get("/", (req, res) => {
     res.send('hey iam root');
 })
 
-app.all("*",(req,res,next)=>{
-    next( new ExpressError(404,"Page not found!"));
+app.all("*", (req, res, next) => {
+    next(new ExpressError(404, "Page not found!"));
 })
 app.use((err, req, res, next) => {
-    let{status=500,message="Something went wrong"}=err;
+    let { status = 500, message = "Something went wrong" } = err;
     res.status(status).send(message);
 });
-app.listen('8080', (req, res) => {
+app.listen(8080, (req, res) => {
     console.log("Listening Port 8080");
 })
