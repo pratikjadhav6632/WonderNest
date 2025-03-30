@@ -34,23 +34,23 @@ app.use(express.static(path.join(__dirname, "/public")));
 // };
 
 //Index route
-app.get("/listings", async (req, res) => {
+app.get("/listings", wrapAsync(async (req, res) => {
     let allListing = await Listing.find({});
     res.render("listings/index.ejs", { allListing });
 
-})
+}));
 
 //New route
-app.get("/listings/new", (req, res) => {
+app.get("/listings/new", wrapAsync((req, res) => {
     res.render("listings/new.ejs")
-})
+}));
 
 //Show route 
-app.get("/listings/:id", async (req, res) => {
+app.get("/listings/:id", wrapAsync(async (req, res) => {
     let { id } = req.params;
     let listing = await Listing.findById(id);
     res.render("listings/show.ejs", { listing });
-})
+}));
 
 //Create route
 app.post("/listings",wrapAsync(async (req, res, next) => {
@@ -62,25 +62,25 @@ app.post("/listings",wrapAsync(async (req, res, next) => {
 }));
 
 //Edit route
-app.get("/listings/:id/edit", async (req, res) => {
+app.get("/listings/:id/edit", wrapAsync(async (req, res) => {
     let { id } = req.params;
     let listing = await Listing.findById(id);
     res.render("listings/edit.ejs", { listing });
-});
+}));
 
 //Update route
-app.put("/listings/:id", async (req, res) => {
+app.put("/listings/:id", wrapAsync(async (req, res) => {
     let { id } = req.params;
     await Listing.findByIdAndUpdate(id, { ...req.body.listings });
     res.redirect("/listings");
-})
+}));
 
 //Destroy route
-app.delete("/listings/:id", async (req, res) => {
+app.delete("/listings/:id", wrapAsync(async (req, res) => {
     let { id } = req.params;
     await Listing.findByIdAndDelete(id);
     res.redirect("/listings");
-})
+}));
 
 //Testing route
 /*app.get("/test",async (req,res)=>{
@@ -107,7 +107,7 @@ app.all("*",(req,res,next)=>{
     next( new ExpressError(404,"Page not found!"));
 })
 app.use((err, req, res, next) => {
-    let{status,message}=err;
+    let{status=500,message="Something went wrong"}=err;
     res.status(status).send(message);
 });
 app.listen('8080', (req, res) => {
