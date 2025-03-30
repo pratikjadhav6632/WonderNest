@@ -7,7 +7,7 @@ const path = require("path");
 const methodOverride = require("method-override");
 const engine = require("ejs-mate");
 const wrapAsync=require("./utils/wrapAsync.js");
-
+const ExpressError=require("./utils/ExpressErr.js");
 
 main().then((res) => {
     console.log("Database Connected...");
@@ -102,8 +102,13 @@ app.delete("/listings/:id", async (req, res) => {
 app.get("/", (req, res) => {
     res.send('hey iam root');
 })
+
+app.all("*",(req,res,next)=>{
+    next( new ExpressError(404,"Page not found!"));
+})
 app.use((err, req, res, next) => {
-    res.send("Something went wrong");
+    let{status,message}=err;
+    res.status(status).send(message);
 });
 app.listen('8080', (req, res) => {
     console.log("Listening Port 8080");
