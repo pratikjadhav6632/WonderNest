@@ -1,3 +1,6 @@
+html,body{
+    height: 100%;
+}
 /*Navbar*/
 .navbar{
     height: 4rem !important;
@@ -12,6 +15,7 @@
 }
 
 /*footer*/
+
 .fa-brands{
     color: rgb(82, 78, 78);
     font-size: 1.3rem;
