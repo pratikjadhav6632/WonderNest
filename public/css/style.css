@@ -1,6 +1,4 @@
-html,body{
-    height: 100%;
-}
+
 /*Navbar*/
 .navbar{
     height: 4rem !important;
@@ -43,6 +41,8 @@ html,body{
 }
 
 .f-info{
+    position: relative;
+    bottom: 0;
     height: 100px;
     display: flex;
     justify-content: space-around;
@@ -141,4 +141,10 @@ html,body{
     border-radius: 1rem !important;
     border: none !important;
     padding:10px 30px  !important;
+}
+/*Error page*/
+.container{
+    display: flex;
+  flex-direction: column;
+  min-height: 70vh;
 }
