@@ -27,6 +27,16 @@ app.use(methodOverride("_method"));
 app.engine("ejs", engine);
 app.use(express.static(path.join(__dirname, "/public")));
 
+//validate Error Handler
+const validateErr=(req,res,next)=>{
+    
+let {error} = ListingSchema.validate(req.body);
+if(error){
+    throw new ExpressError(400,error);
+}else{
+    next();
+}
+}
 //Index route
 app.get("/listings", wrapAsync(async (req, res) => {
     let allListing = await Listing.find({});
@@ -47,12 +57,7 @@ app.get("/listings/:id", wrapAsync(async (req, res) => {
 }));
 
 //Create route
-app.post("/listings", wrapAsync(async (req, res, next) => {
-    let result = ListingSchema.validate(req.body);
-    console.log(result.error);
-    if(result.error){
-        throw new ExpressError(400,result.error);
-    }
+app.post("/listings",validateErr,wrapAsync(async (req, res, next) => {
     const newListing = new Listing(req.body.listings);
     await newListing.save();
     res.redirect("/listings");
@@ -66,7 +71,7 @@ app.get("/listings/:id/edit", wrapAsync(async (req, res) => {
 }));
 
 //Update route
-app.put("/listings/:id", wrapAsync(async (req, res) => {
+app.put("/listings/:id",validateErr, wrapAsync(async (req, res) => {
     if(!req.body.listings){
         throw new ExpressError(400,"Send Valid Data for listing..");
     }
