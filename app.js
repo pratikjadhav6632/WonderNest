@@ -26,15 +26,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.engine("ejs", engine);
 app.use(express.static(path.join(__dirname, "/public")));
+app.use(express.json());
 
 //validate Error Handler
 const validateErr=(req,res,next)=>{
-    
 let {error} = ListingSchema.validate(req.body);
 if(error){
-    throw new ExpressError(400,error);
-}else{
-    next();
+    let errMsg=error.details.map((e) => e.message).join(", ");
+    throw new ExpressError(400,errMsg);
 }
 }
 //Index route
@@ -72,9 +71,6 @@ app.get("/listings/:id/edit", wrapAsync(async (req, res) => {
 
 //Update route
 app.put("/listings/:id",validateErr, wrapAsync(async (req, res) => {
-    if(!req.body.listings){
-        throw new ExpressError(400,"Send Valid Data for listing..");
-    }
     let { id } = req.params;
     await Listing.findByIdAndUpdate(id, { ...req.body.listings });
     res.redirect("/listings");
