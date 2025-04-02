@@ -8,6 +8,7 @@ const methodOverride = require("method-override");
 const engine = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressErr.js");
+const {ListingSchema}=require("./Schema.js");
 
 main().then((res) => {
     console.log("Database Connected...");
@@ -25,13 +26,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.engine("ejs", engine);
 app.use(express.static(path.join(__dirname, "/public")));
-
-//Error Handling Function
-// function ErrHandler(fn){
-//     return function(req,res,next){
-//         fn(req,res,next).catch((err)=>next(err));
-//     };
-// };
 
 //Index route
 app.get("/listings", wrapAsync(async (req, res) => {
@@ -54,9 +48,8 @@ app.get("/listings/:id", wrapAsync(async (req, res) => {
 
 //Create route
 app.post("/listings", wrapAsync(async (req, res, next) => {
-    if(!req.body.listings){
-        throw new ExpressError(400,"Send Valid Data for listing..");
-    }
+    let result = ListingSchema.validate(req.body);
+    console.log(result.error);
     const newListing = new Listing(req.body.listings);
     await newListing.save();
     res.redirect("/listings");
