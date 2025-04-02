@@ -50,6 +50,9 @@ app.get("/listings/:id", wrapAsync(async (req, res) => {
 app.post("/listings", wrapAsync(async (req, res, next) => {
     let result = ListingSchema.validate(req.body);
     console.log(result.error);
+    if(result.error){
+        throw new ExpressError(400,result.error);
+    }
     const newListing = new Listing(req.body.listings);
     await newListing.save();
     res.redirect("/listings");
@@ -106,7 +109,7 @@ app.all("*", (req, res, next) => {
 
 app.use((err, req, res, next) => {
     let { status = 500, message = "Something went wrong" } = err;
-    res.render("Error/err.ejs",{message});
+    res.status(status).render("Error/err.ejs",{message});
     // res.status(status).send(message);
 });
 
