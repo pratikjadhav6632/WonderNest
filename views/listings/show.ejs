@@ -1,32 +1,40 @@
 <%layout("/layouts/boilerplate")-%>
 <body>
   <br><br>
-    <h3>All deatils</h3>
+  <h3 class="text-center">All Details</h3>
   <br><br>
-    <div class="card display-card mb-3" style="max-width: 540px;">
-      <div class="row-md-8 g-0 display-row">
-        <div class="col-md-8">
-          <img src="<%=listing.image%>" class="img-fluid rounded-start" alt="...">
+
+  <div class="container">
+    <div class="card mb-4 mx-auto shadow-lg" style="max-width: 720px; border-radius: 10px;">
+      <div class="row g-0 align-items-center">
+        
+        <!-- Image Section -->
+        <div class="col-md-5">
+          <img src="<%=listing.image%>" class="img-fluid rounded-start w-100" alt="Listing Image" style="height: 100%; object-fit: cover;">
         </div>
-        <div class="col-md-8">
-          <div class="card-body col-md-8 data-col">
-            <h5 class="card-title"><%=listing.title%></h5>
-            <p class="card-text"><%=listing.description%></p>
-            <p class="card-text">&#8377 <%=listing.price.toLocaleString("en-IN")%>/night</p>
-            <p class="card-text"><%=listing.location%></p>
-            <p class="card-text"><%=listing.country%></p>
-            <div class="btns">
-              <a href="/listings/<%=listing._id%>/edit">
-                  <button class="btn btn-changes">Edit</button>
-              </a>
-              <form action="/listings/<%=listing._id%>?_method=DELETE" method="post">
-                  <button class="btn btn-changes">Delete</button>
+
+        <!-- Details Section -->
+        <div class="col-md-7">
+          <div class="card-body">
+            <h4 class="card-title fw-bold"><%=listing.title%></h4>
+            <p class="card-text text-muted"><%=listing.description%></p>
+            <h5 class="text-success">&#8377; <%=listing.price.toLocaleString("en-IN")%> /night</h5>
+            <p class="card-text"><i class="bi bi-geo-alt"></i> <%=listing.location%>, <%=listing.country%></p>
+            
+            <!-- Buttons -->
+            <div class="d-flex gap-2">
+              <a href="/listings/<%=listing._id%>/edit" class="btn btn-primary flex-grow-1">Edit</a>
+              <form action="/listings/<%=listing._id%>?_method=DELETE" method="post" class="w-100">
+                <button type="submit" class="btn btn-danger w-100">Delete</button>
               </form>
-          </div>
+            </div>
+
           </div>
         </div>
+
       </div>
     </div>
+  </div>
 
-    <br><br>
+  <br><br>
 </body>
