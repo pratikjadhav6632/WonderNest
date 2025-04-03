@@ -30,18 +30,21 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 
 //validate Error Handler
-const validateErr=(req,res,next)=>{
-    console.log("Incoming Request Body:", req.body);
-let {error} = ListingSchema.validate(req.body);
-if(error){
-    let errMsg=error.details.map((e) => e.message).join(", ");
-    // throw new ExpressError(400,errMsg);
-    next(new ExpressError(400, errMsg));
-}else{
-    next();
-}
-}
+// const validateErr = (req, res, next) => {
+//     console.log("Incoming Request Body:", req.body);
+//     let { error } = ListingSchema.validate(req.body.listings);
+//     if (error) {
+//         let errMsg = error.details.map((e) => e.message).join(", ");
+//         throw new ExpressError(400, errMsg);
+//     } else {
+//         next();
+//     }
+// };
+
+
+
 //Index route
+
 app.get("/listings", wrapAsync(async (req, res) => {
     let allListing = await Listing.find({});
     res.render("listings/index.ejs", { allListing });
@@ -61,7 +64,7 @@ app.get("/listings/:id", wrapAsync(async (req, res) => {
 }));
 
 //Create route
-app.post("/listings",validateErr,wrapAsync(async (req, res, next) => {
+app.post("/listings", wrapAsync(async (req, res, next) => {
     const newListing = new Listing(req.body.listings);
     await newListing.save();
     res.redirect("/listings");
@@ -75,7 +78,7 @@ app.get("/listings/:id/edit", wrapAsync(async (req, res) => {
 }));
 
 //Update route
-app.put("/listings/:id",validateErr, wrapAsync(async (req, res) => {
+app.put("/listings/:id", wrapAsync(async (req, res) => {
     let { id } = req.params;
     await Listing.findByIdAndUpdate(id, { ...req.body.listings });
     res.redirect("/listings");
