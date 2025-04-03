@@ -30,11 +30,13 @@ app.use(express.json());
 
 //validate Error Handler
 const validateErr=(req,res,next)=>{
+    console.log("Incoming Request Body:", req.body);
 let {error} = ListingSchema.validate(req.body);
 if(error){
     let errMsg=error.details.map((e) => e.message).join(", ");
     throw new ExpressError(400,errMsg);
 }
+    next();
 }
 //Index route
 app.get("/listings", wrapAsync(async (req, res) => {
