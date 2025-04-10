@@ -81,7 +81,7 @@ app.get("/listings/:id/edit", wrapAsync(async (req, res) => {
 app.put("/listings/:id", wrapAsync(async (req, res) => {
     let { id } = req.params;
     await Listing.findByIdAndUpdate(id, { ...req.body.listings });
-    res.redirect("/listings");
+    res.redirect(`/listings/${id}`);
 }));
 
 //Destroy route
