@@ -8,6 +8,10 @@ const reviewSchema=new Schema({
         type:Number,
         min:1,
         max:5
+    },
+    created_at:{
+        type:Date,
+        default:Date.now()
     }
 })
 
