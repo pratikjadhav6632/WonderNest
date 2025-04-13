@@ -9,6 +9,7 @@ const engine = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressErr.js");
 const {ListingSchema}=require("./Schema.js");
+const Review = require("./model/review.js")
 
 main().then((res) => {
     console.log("Database Connected...");
@@ -91,6 +92,19 @@ app.delete("/listings/:id", wrapAsync(async (req, res) => {
     res.redirect("/listings");
 }));
 
+//Review Route
+app.post("/listings/:id/reviews",async(req,res,next)=>{
+    let listing=await Listing.findById(req.params.id);
+    let newReview=new Review(req.body.review);
+
+    listing.reviews.push(newReview);
+
+    await newReview.save();
+    await listing.save();
+
+    console.log("review saved successfully");
+    res.redirect(`/listings/${listing.id}`);
+})
 //Testing route
 /*app.get("/test",async (req,res)=>{
     let sampledata=new Listing({
