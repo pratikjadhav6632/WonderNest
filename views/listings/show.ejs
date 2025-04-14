@@ -5,7 +5,7 @@
   <br><br>
 
   <div class="container">
-    <div class="card mb-4 mx-auto shadow-lg" style="max-width: 720px; border-radius: 10px;">
+    <div class="card mb-4 mx-auto shadow-lg" style="max-width: 820px; border-radius: 10px;">
       <div class="row g-0 align-items-center">
         
         <!-- Image Section -->
@@ -22,16 +22,14 @@
             <p class="card-text"><i class="bi bi-geo-alt"></i> <%=listing.location%>, <%=listing.country%></p>
             
             <!-- Buttons -->
-            <div class="d-flex gap-2">
-              <a href="/listings/<%=listing._id%>/edit" class="btn btn-primary flex-grow-1">Edit</a>
-              <form action="/listings/<%=listing._id%>?_method=DELETE" method="post" class="w-100">
+            <div class="d-flex gap-2 ">
+              <a href="/listings/<%=listing._id%>/edit" class="btn btn-primary flex-grow-1 mt-3">Edit</a>
+              <form action="/listings/<%=listing._id%>?_method=DELETE" method="post" class="w-100 mt-3">
                 <button type="submit" class="btn btn-danger w-100">Delete</button>
               </form>
             </div>
-
           </div>
         </div>
-
       </div>
     </div>
     <hr>
@@ -54,20 +52,22 @@
     </div>
         <button class="btn btn-outline-dark">Submit</button>
       </form>
-    </div>
     <hr>
-    <div class="row offset-2">
       <p><b>All reviews</b></p> 
+    <div class="row ">
       <%for(review of listing.reviews){%>
-     <div class="card col-5 ms-2 mb-3">
+     <div class="card col-5 ms-3 mb-3">
       <div class="card-body">
         <h5 class="card-title">Joe doe</h5>
           <p class="card-text"><%=review.comment%></p>
           <p class="card-text"><%=review.rating%> ⭐</p>
+          <form  method="post" action="/listings/<%=listing._id%>/review/<%=review._id%>?_method=DELETE" class="mb-3">
+            <button class="btn btn-sm btn-danger">Delete</button>
+          </form>
       </div>
-     </div>
+      </div>
       <%}%>
- 
+    </div>
     </div>
   </div>
 

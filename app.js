@@ -102,8 +102,8 @@ app.delete("/listings/:id", wrapAsync(async (req, res) => {
     await Listing.findByIdAndDelete(id);
     res.redirect("/listings");
 }));
-
-//Review Route
+//Review
+//post  Route
 app.post("/listings/:id/reviews", validateReview ,wrapAsync(async(req,res,next)=>{
     let listing=await Listing.findById(req.params.id);
     let newReview=new Review(req.body.review);
@@ -112,6 +112,15 @@ app.post("/listings/:id/reviews", validateReview ,wrapAsync(async(req,res,next)=
     await listing.save();
     res.redirect(`/listings/${listing.id}`);
 }));
+
+//Delete  Route
+app.delete("/listings/:id/review/:reviewId",wrapAsync(async(req,res)=>{
+    let {id,reviewId}=req.params;
+    await Listing.findByIdAndUpdate(id,{$pull:{reviews:reviewId}});
+    await Review.findByIdAndDelete(reviewId);
+    res.redirect(`/listings/${id}`);
+}))
+
 //Testing route
 /*app.get("/test",async (req,res)=>{
     let sampledata=new Listing({
