@@ -8,7 +8,7 @@ const methodOverride = require("method-override");
 const engine = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressErr.js");
-const {ListingSchema}=require("./Schema.js");
+const {ListingSchema ,reviewSchema}=require("./Schema.js");
 const Review = require("./model/review.js")
 
 main().then((res) => {
@@ -31,16 +31,27 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 
 //validate Error Handler
-// const validateErr = (req, res, next) => {
-//     console.log("Incoming Request Body:", req.body);
-//     let { error } = ListingSchema.validate(req.body.listings);
-//     if (error) {
-//         let errMsg = error.details.map((e) => e.message).join(", ");
-//         throw new ExpressError(400, errMsg);
-//     } else {
-//         next();
-//     }
-// };
+const validateErr = (req, res, next) => {
+    let { error } = ListingSchema.validate(req.body);
+    if (error) {
+        let errMsg = error.details.map((e) => e.message).join(", ");
+        throw new ExpressError(400, errMsg);
+    } else {
+        next();
+    }
+};
+
+//Review Error Handler
+
+const reviewErr = (req, res, next) => {
+    let { error } = reviewSchema.validate(req.body);
+    if (error) {
+        let errMsg = error.details.map((e) => e.message).join(", ");
+        throw new ExpressError(400, errMsg);
+    } else {
+        next();
+    }
+};
 
 
 
@@ -93,7 +104,7 @@ app.delete("/listings/:id", wrapAsync(async (req, res) => {
 }));
 
 //Review Route
-app.post("/listings/:id/reviews",async(req,res,next)=>{
+app.post("/listings/:id/reviews",reviewErr,wrapAsync(async(req,res,next)=>{
     let listing=await Listing.findById(req.params.id);
     let newReview=new Review(req.body.review);
 
@@ -104,7 +115,7 @@ app.post("/listings/:id/reviews",async(req,res,next)=>{
 
     console.log("review saved successfully");
     res.redirect(`/listings/${listing.id}`);
-})
+}));
 //Testing route
 /*app.get("/test",async (req,res)=>{
     let sampledata=new Listing({
