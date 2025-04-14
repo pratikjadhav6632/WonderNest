@@ -31,7 +31,7 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 
 //validate Error Handler
-const validateErr = (req, res, next) => {
+const validateListing = (req, res, next) => {
     let { error } = ListingSchema.validate(req.body);
     if (error) {
         let errMsg = error.details.map((e) => e.message).join(", ");
@@ -43,7 +43,7 @@ const validateErr = (req, res, next) => {
 
 //Review Error Handler
 
-const reviewErr = (req, res, next) => {
+const validateReview = (req, res, next) => {
     let { error } = reviewSchema.validate(req.body);
     if (error) {
         let errMsg = error.details.map((e) => e.message).join(", ");
@@ -76,7 +76,7 @@ app.get("/listings/:id", wrapAsync(async (req, res) => {
 }));
 
 //Create route
-app.post("/listings", wrapAsync(async (req, res, next) => {
+app.post("/listings",validateListing, wrapAsync(async (req, res, next) => {
     const newListing = new Listing(req.body.listings);
     await newListing.save();
     res.redirect("/listings");
@@ -90,7 +90,7 @@ app.get("/listings/:id/edit", wrapAsync(async (req, res) => {
 }));
 
 //Update route
-app.put("/listings/:id", wrapAsync(async (req, res) => {
+app.put("/listings/:id",validateListing, wrapAsync(async (req, res) => {
     let { id } = req.params;
     await Listing.findByIdAndUpdate(id, { ...req.body.listings });
     res.redirect(`/listings/${id}`);
@@ -104,7 +104,7 @@ app.delete("/listings/:id", wrapAsync(async (req, res) => {
 }));
 
 //Review Route
-app.post("/listings/:id/reviews",reviewErr,wrapAsync(async(req,res,next)=>{
+app.post("/listings/:id/reviews", validateReview ,wrapAsync(async(req,res,next)=>{
     let listing=await Listing.findById(req.params.id);
     let newReview=new Review(req.body.review);
 
