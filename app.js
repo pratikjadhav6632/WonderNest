@@ -15,7 +15,7 @@ main().then((res) => {
     console.log("Database Connected...");
 }).catch((err) => {
     console.log(err);
-})
+});
 
 async function main() {
     await mongoose.connect(Mongo_url);
@@ -119,7 +119,7 @@ app.delete("/listings/:id/review/:reviewId",wrapAsync(async(req,res)=>{
     await Listing.findByIdAndUpdate(id,{$pull:{reviews:reviewId}});
     await Review.findByIdAndDelete(reviewId);
     res.redirect(`/listings/${id}`);
-}))
+}));
 
 //Testing route
 /*app.get("/test",async (req,res)=>{
@@ -140,11 +140,11 @@ app.delete("/listings/:id/review/:reviewId",wrapAsync(async(req,res)=>{
 
 app.get("/", (req, res) => {
     res.send('hey iam root');
-})
+});
 
 app.all("*", (req, res, next) => {
     next(new ExpressError(404, "Page not found!"));
-})
+});
 
 app.use((err, req, res, next) => {
     let { status = 500, message = "Something went wrong" } = err;
@@ -154,4 +154,4 @@ app.use((err, req, res, next) => {
 
 app.listen(8080, (req, res) => {
     console.log("Listening Port 8080");
-})
+});
