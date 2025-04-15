@@ -61,7 +61,7 @@
         <h5 class="card-title">Joe doe</h5>
           <p class="card-text"><%=review.comment%></p>
           <p class="card-text"><%=review.rating%> ⭐</p>
-          <form  method="post" action="/listings/<%=listing._id%>/review/<%=review._id%>?_method=DELETE" class="mb-3">
+          <form  method="post" action="/listings/<%=listing._id%>/reviews/<%=review._id%>?_method=DELETE" class="mb-3">
             <button class="btn btn-sm btn-danger">Delete</button>
           </form>
       </div>

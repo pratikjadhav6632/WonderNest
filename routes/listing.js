@@ -1,9 +1,9 @@
 const express=require("express");
 const router=express.Router();
-const Listing = require("../model/listing.js")
+const Listing = require("../model/listing.js");
 const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/ExpressErr.js");
-const {ListingSchema ,reviewSchema}=require("../Schema.js");
+const {ListingSchema}=require("../Schema.js");
 
 
 //validate Error Handler

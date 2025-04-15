@@ -2,15 +2,14 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const Mongo_url = "mongodb://127.0.0.1:27017/wonderNest"
-const Listing = require("./model/listing.js")
 const path = require("path");
 const methodOverride = require("method-override");
 const engine = require("ejs-mate");
-const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressErr.js");
-const {ListingSchema ,reviewSchema}=require("./Schema.js");
-const Review = require("./model/review.js")
+
+
 const listing=require("./routes/listing.js");
+const reviews=require("./routes/review.js");
 
 main().then((res) => {
     console.log("Database Connected...");
@@ -31,55 +30,10 @@ app.engine("ejs", engine);
 app.use(express.static(path.join(__dirname, "/public")));
 
 
-//Review Error Handler
 
-const validateReview = (req, res, next) => {
-    let { error } = reviewSchema.validate(req.body);
-    if (error) {
-        let errMsg = error.details.map((e) => e.message).join(", ");
-        throw new ExpressError(400, errMsg);
-    } else {
-        next();
-    }
-};
+app.use("/listings",listing);
+app.use("/listings/:id/reviews",reviews);
 
-app.use("/listings",listing)
-
-//Review
-//post  Route
-app.post("/listings/:id/reviews", validateReview ,wrapAsync(async(req,res,next)=>{
-    let listing=await Listing.findById(req.params.id);
-    let newReview=new Review(req.body.review);
-    listing.reviews.push(newReview);
-    await newReview.save();
-    await listing.save();
-    res.redirect(`/listings/${listing.id}`);
-}));
-
-//Delete  Route
-app.delete("/listings/:id/review/:reviewId",wrapAsync(async(req,res)=>{
-    let {id,reviewId}=req.params;
-    await Listing.findByIdAndUpdate(id,{$pull:{reviews:reviewId}});
-    await Review.findByIdAndDelete(reviewId);
-    res.redirect(`/listings/${id}`);
-}));
-
-//Testing route
-/*app.get("/test",async (req,res)=>{
-    let sampledata=new Listing({
-        title:"AC Room",
-        description:"demo description",
-        location:"pune",
-        country:"India"
-    })
-   await sampledata.save().then((res)=>{
-        console.log(res);
-    }).catch((err)=>{
-        console.log(err);
-    });
-    console.log(sampledata);
-    res.send("test successfull...");
-})*/
 
 app.get("/", (req, res) => {
     res.send('hey iam root');
