@@ -6,6 +6,7 @@ const path = require("path");
 const methodOverride = require("method-override");
 const engine = require("ejs-mate");
 const ExpressError = require("./utils/ExpressErr.js");
+const session=require("express-session");
 
 
 const listing=require("./routes/listing.js");
