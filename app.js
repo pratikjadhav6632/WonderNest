@@ -30,6 +30,11 @@ app.use(methodOverride("_method"));
 app.engine("ejs", engine);
 app.use(express.static(path.join(__dirname, "/public")));
 
+const sessionOptions={
+    secret:"MySecrete",
+    resave:false,
+    saveUninitialized:true
+}
 
 
 app.use("/listings",listing);
