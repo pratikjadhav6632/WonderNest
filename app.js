@@ -33,13 +33,18 @@ app.use(express.static(path.join(__dirname, "/public")));
 const sessionOptions={
     secret:"MySecrete",
     resave:false,
-    saveUninitialized:true
-}
+    saveUninitialized:true,
+    cookie:{
+        expires:Date.now()*7*24*60*60*1000,
+        maxAge:7*24*60*60*1000,
+        httpOnly:true
+    }
+};
 
 
 app.use("/listings",listing);
 app.use("/listings/:id/reviews",reviews);
-
+app.use(session(sessionOptions));
 
 app.get("/", (req, res) => {
     res.send('hey iam root');
