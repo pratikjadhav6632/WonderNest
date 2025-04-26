@@ -31,20 +31,20 @@ app.engine("ejs", engine);
 app.use(express.static(path.join(__dirname, "/public")));
 
 const sessionOptions={
-    secret:"MySecrete",
+    secret:"MySecret",
     resave:false,
     saveUninitialized:true,
     cookie:{
-        expires:Date.now()*7*24*60*60*1000,
+        expires:(Date.now()*7*24*60*60*1000),
         maxAge:7*24*60*60*1000,
         httpOnly:true
     }
 };
 
-
+app.use(session(sessionOptions));
 app.use("/listings",listing);
 app.use("/listings/:id/reviews",reviews);
-app.use(session(sessionOptions));
+
 
 app.get("/", (req, res) => {
     res.send('hey iam root');
