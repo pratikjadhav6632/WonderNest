@@ -7,6 +7,7 @@ const methodOverride = require("method-override");
 const engine = require("ejs-mate");
 const ExpressError = require("./utils/ExpressErr.js");
 const session=require("express-session");
+const flash=require("connect-flash");
 
 
 const listing=require("./routes/listing.js");
@@ -41,14 +42,24 @@ const sessionOptions={
     }
 };
 
+app.get("/", (req, res) => {
+    res.send('hey iam root');
+});
+
+
+
 app.use(session(sessionOptions));
+app.use(flash());
+
+app.use((req,res,next)=>{
+    res.locals.success=req.flash("success");
+    next();
+})
+
 app.use("/listings",listing);
 app.use("/listings/:id/reviews",reviews);
 
 
-app.get("/", (req, res) => {
-    res.send('hey iam root');
-});
 
 app.all("*", (req, res, next) => {
     next(new ExpressError(404, "Page not found!"));
