@@ -148,6 +148,7 @@
   flex-direction: column;
   min-height: 70vh;
 }
-/* .alert{
+.alert{
+    margin-top: 10px;
     height: 5rem !important;
-} */
+}
