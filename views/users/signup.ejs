@@ -1,0 +1,33 @@
+<%layout("/layouts/boilerplate")-%>
+        <div class="row">
+            <div class="col-6 offset-0">
+                <div class="card signup-card">
+                    <h2 class="text-center mb-3">Signup for <span class="brand-name">Wondernest.</span></h2>
+                <form action="/signup" method="post" novalidate class="needs-validation">
+                    <div class="mb-3 ">
+                        <label for="username"class="form-label">Username</label>
+                        <input type="text" name="username" placeholder="Joedoe12" class="form-control" required>
+                        <div class="invalid-feedback">
+                            Please Enter a Username.
+                          </div>
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="email"class="form-label">Email</label>
+                        <input type="email" name="email" placeholder="Joedoe@gmail.com" class="form-control" required>
+                      
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="password"class="form-label">Password</label>
+                        <input type="password" name="password"  class="form-control" required>
+                        
+                    </div>
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                    <button class="btn btn-primary">Signup</button>
+                </div>
+                <div class="text-center mt-3">
+                    <p>I have an already account, <span style="color: blue;"><a href="">Login here</a></span></p>
+                </div>
+                </form>
+            </div>
+            </div>
+        </div>

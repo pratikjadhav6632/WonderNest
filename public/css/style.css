@@ -152,3 +152,15 @@
     margin-top: 10px;
     height: 5rem !important;
 }
+
+/*Signup Page*/
+
+.signup-card{ 
+    margin-top:5%; 
+    margin-bottom: 20%;
+    padding: 30px;
+    border-radius: 15px;  
+}
+.brand-name{
+    color:  rgb(235, 106, 106);
+}

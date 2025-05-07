@@ -15,6 +15,7 @@ const User=require("./model/user.js");
 
 const listing=require("./routes/listing.js");
 const reviews=require("./routes/review.js");
+const user=require("./routes/user.js");
 
 main().then((res) => {
     console.log("Database Connected...");
@@ -64,6 +65,7 @@ passport.deserializeUser(User.deserializeUser);
 
 app.use((req,res,next)=>{
     res.locals.success=req.flash("success");
+    res.locals.error=req.flash("error");
     next();
 })
 
@@ -78,6 +80,7 @@ app.get("/demoUser",async(req,res)=>{
 
 app.use("/listings",listing);
 app.use("/listings/:id/reviews",reviews);
+app.use("/",user);
 
 
 
