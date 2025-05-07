@@ -57,7 +57,7 @@ app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(new LocalStatergies(User.authenticate));
+passport.use(new LocalStatergies(User.authenticate));
 
 passport.serializeUser(User.serializeUser);
 passport.deserializeUser(User.deserializeUser);
@@ -65,6 +65,15 @@ passport.deserializeUser(User.deserializeUser);
 app.use((req,res,next)=>{
     res.locals.success=req.flash("success");
     next();
+})
+
+app.get("/demoUser",async(req,res)=>{
+    const fakeUser=new User({
+        email:"edmo@gmail.com",
+        username:"Demo12"
+    });
+    let registeredUser=await User.register(fakeUser,"Abc123");
+    res.send(registeredUser);
 })
 
 app.use("/listings",listing);

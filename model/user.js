@@ -10,6 +10,6 @@ const userSchema=new Schema({
 })
 
 //automatically implemented hashing username and salting
-User.plugin(passportLocalMongoose);
+userSchema.plugin(passportLocalMongoose);
 
 module.exports=mongoose.model("User",userSchema);
