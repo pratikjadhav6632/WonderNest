@@ -164,3 +164,13 @@
 .brand-name{
     color:  rgb(235, 106, 106);
 }
+
+.btn-signup{
+    height: 10% !important;
+    margin-right: 1rem !important;
+
+    a{
+        color: white !important;
+      
+    }
+}
