@@ -9,7 +9,7 @@ const ExpressError = require("./utils/ExpressErr.js");
 const session=require("express-session");
 const flash=require("connect-flash");
 const passport=require("passport");
-const LocalStatergies=require("passport-local");
+const LocalStrategy=require("passport-local");
 const User=require("./model/user.js");
 
 
@@ -38,10 +38,10 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 const sessionOptions={
     secret:"MySecret",
-    resave:false,
+    resave:true,
     saveUninitialized:true,
     cookie:{
-        expires:Date.now()*7*24*60*60*1000,
+        expires:Date.now() + 7 * 24 * 60 * 60 * 1000,
         maxAge:7*24*60*60*1000,
         httpOnly:true
     }
@@ -51,17 +51,15 @@ app.get("/", (req, res) => {
     res.send('hey iam root');
 });
 
-
-
 app.use(session(sessionOptions));
 app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStatergies(User.authenticate));
+passport.use(new LocalStrategy(User.authenticate()));
 
-passport.serializeUser(User.serializeUser);
-passport.deserializeUser(User.deserializeUser);
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.use((req,res,next)=>{
     res.locals.success=req.flash("success");
@@ -69,14 +67,14 @@ app.use((req,res,next)=>{
     next();
 })
 
-app.get("/demoUser",async(req,res)=>{
-    const fakeUser=new User({
-        email:"edmo@gmail.com",
-        username:"Demo12"
-    });
-    let registeredUser=await User.register(fakeUser,"Abc123");
-    res.send(registeredUser);
-})
+// app.get("/demoUser",async(req,res)=>{
+//     const fakeUser=new User({
+//         email:"edmo@gmail.com",
+//         username:"Demo12"
+//     });
+//     let registeredUser=await User.register(fakeUser,"Abc123");
+//     res.send(registeredUser);
+// })
 
 app.use("/listings",listing);
 app.use("/listings/:id/reviews",reviews);

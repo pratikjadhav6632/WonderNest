@@ -12,6 +12,13 @@
     <%- include("../includes/navbar.ejs") %>
     <div class="container">
         <%- include("../includes/flash.ejs") %>
+        <% if (locals.success) { %>
+            <div class="alert alert-success"><%= success %></div>
+          <% } %>
+          <% if (locals.error) { %>
+            <div class="alert alert-danger"><%= error %></div>
+          <% } %>
+          
         <%-body%>
     </div>
     <%- include("../includes/footer.ejs") %>

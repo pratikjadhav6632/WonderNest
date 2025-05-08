@@ -28,16 +28,15 @@ router.get("/login", (req, res) => {
 });
 
 router.post("/login",
-    passport.authenticate("local", {
-      failureRedirect: "/login",
-      failureFlash: true
-    }),
-    (req, res) => {
-      req.flash("success", `Welcome back to WonderNest`);
-      req.flash("error", `Welcome back to WonderNest`);
-      res.redirect("/listings");
-    }
-  );
-  
+  passport.authenticate("local", {
+    failureRedirect: "/login",
+    failureFlash: true,
+  }),
+  (req, res) => {
+    req.flash("success", `Welcome back to WonderNest, ${req.user.username}`);
+    res.redirect("/listings");
+  }
+);
+
 
 module.exports = router;
