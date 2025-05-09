@@ -82,7 +82,6 @@ app.use("/listings/:id/reviews",reviews);
 app.use("/",user);
 
 
-
 app.all("*", (req, res, next) => {
     next(new ExpressError(404, "Page not found!"));
 });
