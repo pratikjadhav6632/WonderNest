@@ -41,8 +41,7 @@ router.post(
   }),
   (req, res) => {
     req.flash("success", `Welcome back to WonderNest, ${req.user.username}`);
-    const redirectUrl = req.session.redirectUrl || "/"; // Fallback if none
-    delete req.session.redirectUrl; // Clear it after use
+    const redirectUrl = req.session.redirectUrl;
     res.redirect(redirectUrl);
   }
 );
