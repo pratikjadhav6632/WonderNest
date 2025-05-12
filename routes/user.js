@@ -41,8 +41,8 @@ router.post(
   }),
   (req, res) => {
     req.flash("success", `Welcome back to WonderNest, ${req.user.username}`);
-    const redirectUrl = req.session.redirectUrl;
-    res.redirect(redirectUrl);
+    const redirect=res.locals.redirectUrl || "/listings";
+    res.redirect(redirect);
   }
 );
 
