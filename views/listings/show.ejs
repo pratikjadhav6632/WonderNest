@@ -21,23 +21,28 @@
             <h5 class="text-success">&#8377; <%=listing.price.toLocaleString("en-IN")%> /night</h5>
             <p class="card-text"><i class="bi bi-geo-alt"></i> <%=listing.location%>, <%=listing.country%></p>
             
+            <%if(currUser && currUser._id.equals(listing.owner._id)){%>
             <!-- Buttons -->
-            <div class="d-flex gap-2 ">
+             <div class="d-flex gap-2 ">
               <a href="/listings/<%=listing._id%>/edit" class="btn btn-primary flex-grow-1 mt-3">Edit</a>
               <form action="/listings/<%=listing._id%>?_method=DELETE" method="post" class="w-100 mt-3">
                 <button type="submit" class="btn btn-danger w-100">Delete</button>
               </form>
             </div>
+            <%}%>
+
           </div>
         </div>
       </div>
     </div>
     <hr>
+     <%if(!currUser._id.equals(listing.owner._id)){%>
     <div class=" mb-4 col-md-6 offset-3">
       <h4>Conatct details.</h4>
     <p>Email:<%=listing.owner.email%></p>
     <p>Owner:<%=listing.owner.username%></p>  
     </div>
+     <%}%>
     <hr>
     <div class=" mb-4 col-md-6 offset-3">
       <h4>Leave your Review</h4>
