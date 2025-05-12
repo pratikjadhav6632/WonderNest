@@ -48,3 +48,15 @@ module.exports.validateReview = (req, res, next) => {
         next();
     }
 };
+
+//validate Error Handler
+module.exports.validateListing = (req, res, next) => {
+    let { error } = ListingSchema.validate(req.body);
+    if (error) {
+        let errMsg = error.details.map((e) => e.message).join(", ");
+        throw new ExpressError(400, errMsg);
+    } else {
+        next();
+    }
+};
+
