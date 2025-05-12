@@ -4,7 +4,7 @@ const Listing = require("../model/listing.js");
 const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/ExpressErr.js");
 const {ListingSchema}=require("../Schema.js");
-const {isLoggedIn}=require("../middleware.js");
+const {isLoggedIn,isOwner}=require("../middleware.js");
 
 
 //validate Error Handler
@@ -35,7 +35,7 @@ router.get("/new", isLoggedIn,(req, res) => {
 //Show route 
 router.get("/:id", wrapAsync(async (req, res) => {
     let { id } = req.params;
-    let listing = await Listing.findById(id).populate("reviews").populate("owner");
+    let listing = await Listing.findById(id).populate({path:"reviews",populate:{path:"author"},}).populate("owner");
     res.render("listings/show.ejs", { listing });
 }));
 
@@ -64,7 +64,7 @@ router.put("/:id",validateListing, isLoggedIn, wrapAsync(async (req, res) => {
 }));
 
 //Destroy route
-router.delete("/:id",  isLoggedIn,wrapAsync(async (req, res) => {
+router.delete("/:id",  isLoggedIn,isOwner,wrapAsync(async (req, res) => {
     let { id } = req.params;
     await Listing.findByIdAndDelete(id);
     req.flash("success","Listing deleted");
