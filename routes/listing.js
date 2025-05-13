@@ -11,16 +11,14 @@ const ListingController = require("../controllers/listing.js") //Controllers
 
 router.route("/")
     .get(wrapAsync(ListingController.index)) //index route
-    // .post(validateListing, isLoggedIn, wrapAsync(ListingController.create)); //create route
-    .post(upload.single('listings[image]'),(req,res)=>{
-       res.send(req.file);
-    })
+    .post( isLoggedIn,upload.single('listings[image]'),validateListing, wrapAsync(ListingController.create)); //create route
+    
 
 router.get("/new", isLoggedIn, ListingController.renderNewForm); //New route
 
 router.route("/:id")
     .get(wrapAsync(ListingController.show)) //show route
-    .put(validateListing, isLoggedIn, wrapAsync(ListingController.update)) //update route
+    .put( isLoggedIn,upload.single('listings[image]'), validateListing,wrapAsync(ListingController.update)) //update route
     .delete(isLoggedIn, isOwner, wrapAsync(ListingController.destroy)); //destroy route
 
 router.get("/:id/edit", isLoggedIn, wrapAsync(ListingController.edit)); //Edit route

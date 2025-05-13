@@ -10,7 +10,7 @@
     <%for(let listing of allListing){%>
     <a href="/listings/<%=listing._id%>" class="card-link">
     <div class="card card-display ">
-        <img src="<%=listing.image%>" class="card-img-top " alt="...">
+        <img src="<%=listing.image.url%>" class="card-img-top " alt="...">
         <div class="card-body">
           <h5 class="card-title"><%=listing.title%></h5>
           <p>&#8377 <%=listing.price.toLocaleString("en-IN")%>/night</p>
