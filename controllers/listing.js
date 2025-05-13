@@ -1,6 +1,5 @@
 const Listing = require("../model/listing.js");
 
-
 //index route
 module.exports.index=async (req, res) => {
     let allListing = await Listing.find({});
