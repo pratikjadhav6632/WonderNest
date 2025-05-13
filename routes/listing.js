@@ -2,12 +2,18 @@ const express = require("express");
 const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync.js");
 const { isLoggedIn, isOwner, validateListing } = require("../middleware.js");
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
+
 
 const ListingController = require("../controllers/listing.js") //Controllers
 
 router.route("/")
     .get(wrapAsync(ListingController.index)) //index route
-    .post(validateListing, isLoggedIn, wrapAsync(ListingController.create)); //create route
+    // .post(validateListing, isLoggedIn, wrapAsync(ListingController.create)); //create route
+    .post(upload.single('listings[image]'),(req,res)=>{
+       res.send(req.file);
+    })
 
 router.get("/new", isLoggedIn, ListingController.renderNewForm); //New route
 
