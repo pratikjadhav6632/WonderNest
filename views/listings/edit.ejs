@@ -20,9 +20,12 @@
             </div>
         </div>
         <div class=" mb-3">
-            <label for="title" class="form-label">Listing Image </label>
+            <label for="title" class="form-label">Listing Image </label><br>
+            <img src="<%=originalImgUrl%>" alt="">
+        </div>
+        <div class=" mb-3">
+            <label for="title" class="form-label">Upload new Image </label>
             <input type="file" name="listings[image]" value="<%=listing.image.url%>" class="form-control" >
-           
         </div>
         <div class=" mb-3">
             <label for="title" class="form-label">Price</label>

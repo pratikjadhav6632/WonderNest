@@ -34,7 +34,14 @@ module.exports.create=async (req, res, next) => {
 module.exports.edit=async (req, res) => {
     let { id } = req.params;
     let listing = await Listing.findById(id);
-    res.render("listings/edit.ejs", { listing });
+    if(!listing){
+
+        req.flash("error","Listing your req for does not exist")
+        res.redirect("/listings");
+    }
+    let originalImgUrl=listing.image.url;
+    originalImgUrl.replace("/upload","/upload/h_250,w_300,e_blur:300");
+    res.render("listings/edit.ejs", { listing,originalImgUrl });
 };
 
 //update route
@@ -42,7 +49,6 @@ module.exports.edit=async (req, res) => {
 module.exports.update=async (req, res) => {
     let { id } = req.params;
     let listing=await Listing.findByIdAndUpdate(id, { ...req.body.listings });
-
     if(typeof req.file !== "undefined"){
      let url=req.file.path;
     let filename=req.file.filename;
