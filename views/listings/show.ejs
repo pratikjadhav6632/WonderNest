@@ -89,7 +89,10 @@
       <% for (let review of listing.reviews) { %>
         <div class="card col-5 ms-3 mb-3">
           <div class="card-body">
-            <h5 class="card-title"><%= review.author.username %></h5>
+            <div class="d-flex justify-content-between">
+              <h5 class="card-title"><%= review.author.username %></h5>
+              <p><%review.created_at%></p>
+            </div>
             <div class="trash d-flex justify-content-between">
               <p class="starability-result" data-rating="<%= review.rating %>"></p>
               <% if (currUser && currUser._id.toString() === review.author._id.toString()) { %>

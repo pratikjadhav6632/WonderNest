@@ -40,8 +40,8 @@ module.exports.edit=async (req, res) => {
         res.redirect("/listings");
     }
     let originalImgUrl=listing.image.url;
-    originalImgUrl.replace("/upload","/upload/h_250,w_300,e_blur:300");
-    res.render("listings/edit.ejs", { listing,originalImgUrl });
+   let dem=originalImgUrl.replace("/upload","/upload/e_blur:300/");
+    res.render("listings/edit.ejs", { listing,dem});
 };
 
 //update route
