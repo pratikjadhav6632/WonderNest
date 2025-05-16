@@ -185,3 +185,11 @@
     gap: 2rem;
 
 } */
+
+#map{
+   
+    height: 400px;
+    width: 100% !important; 
+    margin-bottom: 2rem;
+    margin-left: 1rem;
+}

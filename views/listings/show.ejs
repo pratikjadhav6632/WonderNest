@@ -1,5 +1,8 @@
 <% layout("/layouts/boilerplate") -%>
-
+<script>
+   const locationName= "<%= listing.location %>";
+   console.log(locationQuery)
+ </script>
 <body>
   <br><br>
   <h3 class="text-center"><%= listing.title %></h3>
@@ -43,7 +46,7 @@
 
     <% if (!currUser || currUser._id.toString() !== listing.owner._id.toString()) { %>
       <hr>
-      <div class="mb-4 col-md-6 offset-3">
+      <div class="mb-4 col-md-6 offset-2">
         <h4>Contact Details</h4>
         <p>Email: <%= listing.owner.email %></p>
         <p>Owner: <%= listing.owner.username %></p>
@@ -84,6 +87,7 @@
     <% } %>
 
     <hr>
+      <%if(listing.reviews.length > 0){%>
     <div class="row col-8 offset-2">
       <p><strong>All Reviews</strong></p>
       <% for (let review of listing.reviews) { %>
@@ -106,5 +110,12 @@
         </div>
       <% } %>
     </div>
+    <%}%>
+    <div class="row col-9 offset-2">
+      <h3>Where you’ll be</h3><br>
+      <br><br>
+      <div id="map"></div>
+    </div>
   </div>
 </body>
+<script src="/js/map.js"></script>
