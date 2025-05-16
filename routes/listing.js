@@ -9,6 +9,9 @@ const upload = multer({storage })
 
 const ListingController = require("../controllers/listing.js") //Controllers
 
+// router.get("/book",(req,res)=>{
+//     res.render("listings/book.ejs");
+// })
 router.route("/")
     .get(wrapAsync(ListingController.index)) //index route
     .post( isLoggedIn,upload.single('listings[image]'),validateListing, wrapAsync(ListingController.create)); //create route
