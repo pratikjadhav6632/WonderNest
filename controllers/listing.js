@@ -40,7 +40,7 @@ module.exports.edit=async (req, res) => {
         res.redirect("/listings");
     }
     let originalImgUrl=listing.image.url;
-   let dem=originalImgUrl.replace("/upload","/upload/e_blur:300/");
+   let dem=originalImgUrl.replace("/upload","/upload/h_200,w_300");
     res.render("listings/edit.ejs", { listing,dem});
 };
 
