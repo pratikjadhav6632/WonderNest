@@ -2,20 +2,7 @@
 
     const map = new maplibregl.Map({
         container: 'map',
-        style: {
-            version: 8,
-            name: 'Blank',
-            center: [0, 0],
-            zoom: 2,
-            sources: {
-                'raster-tiles': {
-                    type: 'raster',
-                    tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
-                    tileSize: 256,
-                    minzoom: 0,
-                    maxzoom: 19
-                }
-            },
+        style: 'https://api.maptiler.com/maps/streets/style.json?key=get_your_own_OpIi9ZULNHzrESv6T2vL',
             layers: [
                 {
                     id: 'background',
@@ -28,9 +15,8 @@
                     source: 'raster-tiles'
                 }
             ]
-        },
-        center: [0, 0],
-        zoom: 2
+       
+        
     });
 
     async function getCoordinatesFromLocation(location) {
