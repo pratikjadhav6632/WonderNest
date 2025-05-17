@@ -1,8 +1,8 @@
 const map = new maplibregl.Map({
         container: 'map',
         style: 'https://api.maptiler.com/maps/streets/style.json?key=get_your_own_OpIi9ZULNHzrESv6T2vL',
-        center: [0, 0],
-        zoom: 2
+        center: [137.9150899566626, 36.25956997955441],
+        zoom: 0
     });
 
     const size = 200;
@@ -74,7 +74,7 @@ const map = new maplibregl.Map({
 
             // Center map on location
             map.setCenter(lngLat);
-            map.setZoom(13);
+            map.setZoom(14);
 
             // Add pulsing dot as a GeoJSON source + layer
             map.addSource('location-point', {
@@ -115,12 +115,12 @@ map.on('mouseenter', 'location-point-layer', (e) => {
     
     // Customize the label here
     const location =locationName;
-    const country=countryname;
+    const listings=listing;
 
     // Set and show the popup
     popup
         .setLngLat(coordinates)
-        .setHTML(`<strong>Book for exact location</strong>`)
+        .setHTML(`<h4>${listings}</h4><strong>Exact location will be provided after Booking</strong>`)
         .addTo(map);
 });
 
