@@ -100,4 +100,33 @@ const map = new maplibregl.Map({
                 }
             });
         }
+        const popup = new maplibregl.Popup({
+    closeButton: false,
+    closeOnClick: false
+});
+
+// Show popup on mouse enter
+map.on('mouseenter', 'location-point-layer', (e) => {
+    // Change cursor to pointer
+    map.getCanvas().style.cursor = 'pointer';
+
+    // Get coordinates
+    const coordinates = e.features[0].geometry.coordinates.slice();
+    
+    // Customize the label here
+    const location =locationName;
+    const country=countryname;
+
+    // Set and show the popup
+    popup
+        .setLngLat(coordinates)
+        .setHTML(`<strong>Book for exact location</strong>`)
+        .addTo(map);
+});
+
+// Hide popup on mouse leave
+map.on('mouseleave', 'location-point-layer', () => {
+    map.getCanvas().style.cursor = '';
+    popup.remove();
+});
     });
