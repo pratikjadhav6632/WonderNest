@@ -1,8 +1,8 @@
 const map = new maplibregl.Map({
         container: 'map',
         style: 'https://api.maptiler.com/maps/streets/style.json?key=get_your_own_OpIi9ZULNHzrESv6T2vL',
-        center: [137.9150899566626, 36.25956997955441],
-        zoom: 0
+        center: [0,0],
+        zoom: 2
     });
 
     const size = 200;
@@ -74,7 +74,7 @@ const map = new maplibregl.Map({
 
             // Center map on location
             map.setCenter(lngLat);
-            map.setZoom(14);
+            map.setZoom(12);
 
             // Add pulsing dot as a GeoJSON source + layer
             map.addSource('location-point', {

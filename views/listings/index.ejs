@@ -1,24 +1,90 @@
 <% layout('/layouts/boilerplate') -%>
-<body>
-  <br><br>
-    <h3>All Listings</h3>
+  <style>
+    #filters {
+      display: flex;
+      /* flex-wrap: wrap; */
+      width: 100%;
+
+    }
+
+    .filters {
+      margin-top: 1rem;
+      text-align: center;
+      margin-left: 2rem;
+      opacity: 0.7;
+      cursor: pointer;
+    }
+
+    .filters:hover {
+      opacity: 1;
+    }
+  </style>
+
+  <body>
     <!-- <form action="/listings/new" method="get">
         <button>Create New Listing</button>
     </form> -->
-    <br><br>
-    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
-    <%for(let listing of allListing){%>
-    <a href="/listings/<%=listing._id%>" class="card-link">
-    <div class="card card-display ">
-        <img src="<%=listing.image.url%>" class="card-img-top " alt="...">
-        <div class="card-body">
-          <h5 class="card-title"><%=listing.title%></h5>
-          <p>&#8377 <%=listing.price.toLocaleString("en-IN")%>/night</p>
+    <div id="filters">
+      <!-- Filter Bar: Visible on All Devices -->
+      <div class="mb-3 filters">
+
+        <!-- Mobile View: Dropdown -->
+        <div class="d-block d-md-none">
+          <div class="dropdown">
+            <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Filters
+            </button>
+            <ul class="dropdown-menu w-100">
+              <li><a class="dropdown-item" href="#"><i class="fa-solid fa-fire me-2"></i>Trending</a></li>
+              <li><a class="dropdown-item" href="#"><i class="fa-solid fa-city me-2"></i>Cities</a></li>
+              <li><a class="dropdown-item" href="#"><i class="fa-solid fa-mountain-sun me-2"></i>Hilltops</a></li>
+              <li><a class="dropdown-item" href="#"><i class="fa-solid fa-umbrella-beach me-2"></i>Beach</a></li>
+              <li><a class="dropdown-item" href="#"><i class="fa-solid fa-water me-2"></i>Lakeside</a></li>
+              <li><a class="dropdown-item" href="#"><i class="fa-solid fa-tree me-2"></i>Forest</a></li>
+              <li><a class="dropdown-item" href="#"><i class="fa-solid fa-person-swimming me-2"></i>Pool</a></li>
+              <li><a class="dropdown-item" href="#"><i class="fa-solid fa-snowflake me-2"></i>Cold Stays</a></li>
+              <li><a class="dropdown-item" href="#"><i class="fa-solid fa-campground me-2"></i>Camping</a></li>
+              <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gem me-2"></i>Luxury</a></li>
+              <li><a class="dropdown-item" href="#"><i class="fa-solid fa-paw me-2"></i>Pet Friendly</a></li>
+            </ul>
+          </div>
         </div>
+
+        <!-- Desktop View: Horizontal Filter Buttons -->
+        <div class="d-none d-md-flex flex-wrap gap-3">
+          <button class="btn btn-light"><i class="fa-solid fa-fire me-2"></i>Trending</button>
+          <button class="btn btn-light"><i class="fa-solid fa-city me-2"></i>Cities</button>
+          <button class="btn btn-light"><i class="fa-solid fa-mountain-sun me-2"></i>Hilltops</button>
+          <button class="btn btn-light"><i class="fa-solid fa-umbrella-beach me-2"></i>Beach</button>
+          <button class="btn btn-light"><i class="fa-solid fa-water me-2"></i>Lakeside</button>
+          <button class="btn btn-light"><i class="fa-solid fa-tree me-2"></i>Forest</button>
+          <button class="btn btn-light"><i class="fa-solid fa-person-swimming me-2"></i>Pool</button>
+          <button class="btn btn-light"><i class="fa-solid fa-snowflake me-2"></i>Cold Stays</button>
+          <button class="btn btn-light"><i class="fa-solid fa-campground me-2"></i>Camping</button>
+          <button class="btn btn-light"><i class="fa-solid fa-gem me-2"></i>Luxury</button>
+          <button class="btn btn-light"><i class="fa-solid fa-paw me-2"></i>Pet Friendly</button>
+        </div>
+
       </div>
-    </a>
-      <%}%>
+
     </div>
     <br><br>
-    
-</body>
+    <div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1">
+      <%for(let listing of allListing){%>
+        <a href="/listings/<%=listing._id%>" class="card-link">
+          <div class="card card-display ">
+            <img src="<%=listing.image.url%>" class="card-img-top " alt="...">
+            <div class="card-body">
+              <h5 class="card-title">
+                <%=listing.title%>
+              </h5>
+              <p>&#8377 <%=listing.price.toLocaleString("en-IN")%>/night</p>
+            </div>
+          </div>
+        </a>
+        <%}%>
+    </div>
+    <br><br>
+
+  </body>

@@ -193,3 +193,9 @@
     margin-bottom: 2rem;
     margin-left: 1rem;
 }
+
+@media (min-width: 1400px) {
+    .body-container{
+        max-width: 1420px !important;
+    }
+}
