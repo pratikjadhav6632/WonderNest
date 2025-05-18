@@ -1,12 +1,9 @@
 <% layout('/layouts/boilerplate') -%>
 <body>
-    <!-- <form action="/listings/new" method="get">
-        <button>Create New Listing</button>
-    </form> -->
+   <!-- Filters -->
     <div id="filters">
       <!-- Filter Bar: Visible on All Devices -->
       <div class="mb-3 filters">
-
         <!-- Mobile View: Dropdown -->
         <div class="d-block d-md-none">
           <div class="dropdown">
@@ -49,10 +46,11 @@
 
     </div>
     <br><br>
+    <!-- display listings card -->
     <div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1">
       <%for(let listing of allListing){%>
         <a href="/listings/<%=listing._id%>" class="card-link">
-          <div class="card card-display ">
+          <div class="card card-display ">      
             <img src="<%=listing.image.url%>" class="card-img-top " alt="...">
             <div class="card-body">
               <h5 class="card-title">
