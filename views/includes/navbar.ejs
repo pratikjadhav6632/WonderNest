@@ -1,3 +1,20 @@
+<style>
+  .search{
+
+  }
+  .search-bar{
+    padding: 0.7rem;
+    border-radius: 1rem;
+    width: 25rem;
+
+  }
+  .search-btn{
+    border-radius: 0.7rem;
+    background-color: rgb(235, 106, 106) !important;
+    color: white !important;
+  }
+</style>
+
 <nav class="navbar navbar-expand-md bg-body-tertiary border-bottom sticky-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="/listings"><i class="fa-solid fa-compass"></i></a>
@@ -10,6 +27,14 @@
         <a class="nav-link" href="/listings">Explore</a>
         <a class="nav-link" href="/listings/new">Add Nest</a>
       </div>
+
+      <div class="navbar-nav ms-auto search">
+        <form class="d-flex" role="search">
+          <input class="form-control me-2 search-bar" type="search" placeholder="Anywhere &nbsp; | &nbsp; Anytime &nbsp;| &nbsp;Search destination " aria-label="Search" />
+          <button class="btn  search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+        </form>
+      </div>
+
       <div class="navbar-nav ms-auto">
         <%if(!currUser){%>
           <button class="btn btn-sm btn-primary btn-signup">
@@ -21,9 +46,9 @@
           <%}%>
             <%if(currUser){%>
               <button class="btn btn-sm btn-danger btn-signup">
-              <a class="nav-link" href="/logout">Logout</a>
-            </button>
-            <%}%>
+                <a class="nav-link" href="/logout">Logout</a>
+              </button>
+              <%}%>
       </div>
     </div>
   </div>
