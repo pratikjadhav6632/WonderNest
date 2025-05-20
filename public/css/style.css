@@ -219,3 +219,16 @@
     margin-left: 1rem;
 }
 
+
+/* index page-Tax-toggler */
+    .tax-info {
+      display: none;
+    }
+    .tax-toggle{
+      border: 1px solid black;
+      border-radius: 1rem;
+      display:block;
+      width: 16rem;
+      padding:1rem;
+      margin-left: 2rem;
+    }
