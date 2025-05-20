@@ -232,3 +232,16 @@
       padding:1rem;
       margin-left: 2rem;
     }
+
+    /* navbar search-bar */
+    .search-bar{
+    padding: 0.7rem;
+    border-radius: 1rem;
+    width: 25rem;
+
+  }
+  .search-btn{
+    border-radius: 0.7rem;
+    background-color: rgb(235, 106, 106) !important;
+    color: white !important;
+  }
