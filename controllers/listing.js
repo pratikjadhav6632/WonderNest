@@ -8,12 +8,8 @@ module.exports.index=async (req, res) => {
 
 //new route
 module.exports.renderNewForm=(req, res) => {
-    const categories = [
-        "Trending", "Cities", "Hilltops", "Beach", "Lakeside",
-        "Forest", "Pool", "Cold Stays", "Camping", "Luxury",
-        "Pet Friendly", "Entire Place", "Cabins"
-    ];
-        res.render("listings/new.ejs",{categories})
+   
+        res.render("listings/new.ejs")
 };
 
 //show route

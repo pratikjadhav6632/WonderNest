@@ -48,7 +48,7 @@ const listingSchema = new Schema({
             "Pet Friendly",
             "Entire Place",
             "Cabins"],
-        required: true
+       
     }
 });
 

@@ -3,12 +3,13 @@ require('dotenv').config()
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const Mongo_url = "mongodb://127.0.0.1:27017/wonderNest"
+const Mongo_url =process.env.ATLAS_URL;
 const path = require("path");
 const methodOverride = require("method-override");
 const engine = require("ejs-mate");
 const ExpressError = require("./utils/ExpressErr.js");
 const session = require("express-session");
+const Mongo_store=require("connect-mongo");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -18,6 +19,7 @@ const User = require("./model/user.js");
 const listing = require("./routes/listing.js");
 const reviews = require("./routes/review.js");
 const user = require("./routes/user.js");
+const { error } = require('console');
 
 main().then((res) => {
     console.log("Database Connected...");
@@ -37,8 +39,21 @@ app.use(methodOverride("_method"));
 app.engine("ejs", engine);
 app.use(express.static(path.join(__dirname, "/public")));
 
+const store=Mongo_store.create({
+    mongoUrl:Mongo_url,
+    crypto:{
+         secret: 'MySecret',
+    },
+    touchAfter: 24 * 3600
+
+})
+
+store.on("error",()=>{
+    console.log("Error in Mongo_session",error);
+});
 
 const sessionOptions = {
+    store,
     secret: "MySecret",
     resave: true,
     saveUninitialized: true,
