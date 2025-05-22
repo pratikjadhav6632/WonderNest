@@ -57,18 +57,20 @@
 
       <% if (!currUser || currUser._id.toString() !==listing.owner._id.toString()) { %>
         <hr>
-        <div class="mb-4 col-md-6 offset-2">
+        <div class="mb-4 col-6 offset-1">
           <h4>Contact Details</h4>
+          <div class="ms-4">
           <p>Email: <%= listing.owner.email %>
           </p>
           <p>Owner: <%= listing.owner.username %>
           </p>
+          </div>
         </div>
         <% } %>
 
           <% if (currUser) { %>
             <hr>
-            <div class="mb-4 col-md-6 offset-3">
+            <div class="mb-4 col-6 offset-1">
               <h4>Leave your Review</h4>
               <form action="/listings/<%= listing._id %>/reviews" method="post" class="needs-validation" novalidate>
                 <div class="mb-3">
@@ -103,10 +105,10 @@
 
               <hr>
               <%if(listing.reviews.length> 0){%>
-                <div class="row col-8 offset-2">
+                <div class="row col-8 offset-1">
                   <p><strong>All Reviews</strong></p>
                   <% for (let review of listing.reviews) { %>
-                    <div class="card col-5 ms-3 mb-3">
+                    <div class="card col-5 col-md-8 ms-2 mb-3">
                       <div class="card-body">
                         <div class="d-flex justify-content-between">
                           <h5 class="card-title">
@@ -133,7 +135,7 @@
                     <% } %>
                 </div>
                 <%}%>
-                  <div class="row col-9 offset-2">
+                  <div class="row col-8 offset-1">
                     <h3>Where you’ll be</h3><br>
                     <br><br>
                     <div id="map"></div>
