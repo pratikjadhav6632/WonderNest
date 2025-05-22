@@ -114,7 +114,6 @@ map.on('mouseenter', 'location-point-layer', (e) => {
     const coordinates = e.features[0].geometry.coordinates.slice();
     
     // Customize the label here
-    const location =locationName;
     const listings=listing;
 
     // Set and show the popup

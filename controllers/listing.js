@@ -7,8 +7,7 @@ module.exports.index=async (req, res) => {
 };
 
 //new route
-module.exports.renderNewForm=(req, res) => {
-   
+module.exports.renderNewForm=(req, res) => { 
         res.render("listings/new.ejs")
 };
 
