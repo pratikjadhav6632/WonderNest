@@ -7,7 +7,8 @@
   "description": "Finding hotels and rooms to stay",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "vercel-build": "node ./build.js"
   },
   "author": "pratikjadhav",
   "license": "ISC",
